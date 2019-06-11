@@ -1,0 +1,34 @@
+{
+    "name": "swoft-rewrite/swoft-event",
+    "keywords": ["swoft","event"],
+    "description": "分布式开始，重写swoft框架之 -- event 模块",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zhanghongbo",
+            "email": "taobao1875@163.com"
+        }
+    ],
+    "minimum-stability":"dev",
+    "require": {
+        "php": ">7.1.0",
+        "swoft-rewrite/swoft-annotation": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "SwoftRewrite\\Event\\":"src/"
+        },
+        "files": [
+            "src/Helper/Functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SwoftRewrite\\Event\\Unit\\":"test/unit/",
+            "SwoftRewrite\\Event\\Testing\\":"test/testing/"
+        }
+    }
+}
