@@ -5,9 +5,11 @@
  * Date: 2019/6/5
  * Time: 下午4:47
  */
-namespace SwoftRewrite;
+namespace SwoftRewrite\Event;
 
-use SwoftRewrite\Manager\EventManager;
+use SwoftRewrite\Bean\BeanFactory;
+use SwoftRewrite\Event\Manager\EventManager;
+use SwoftRewrite\Framework\Swoft;
 
 final class ListenerRegister
 {
@@ -18,7 +20,17 @@ final class ListenerRegister
 
     public static function register(EventManager $em)
     {
+        //将扫描到的事件监听器 注册到 事件管理器中，在事件管理器中把 监听 列表使用队列
+        foreach(self::$listeners as $className => $eventInfo){
+            $bindListenerObj = BeanFactory::getSingleton($className);//绑定了Listener 类对象
+            $em->addListener($bindListenerObj,$eventInfo);
+        }
+        
 
+        $count1 = count(self::$listeners);
+        $count2 = count(self::$subscribers);
+        self::$listeners = self::$subscribers = [];
+        return [$count1,$count2];
     }
 
     /**
